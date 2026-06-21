@@ -1,0 +1,109 @@
+.login-form__content {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 680px;
+    height: 678px;
+    margin: 40px auto;
+    padding: 50px 60px;
+    border-radius: 8px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.login-form__heading {
+    max-width: 680px;
+    margin: 60px auto 0 auto;
+    text-align: center;
+}
+
+.login-form__heading h1 {
+    font-size: 30px;
+    font-weight: bold;
+    color: #333333;
+}
+
+.form {
+    width: 100%;
+}
+
+.form__group {
+    margin-bottom: 25px;
+}
+
+.form__group-title {
+    margin-bottom: 8px;
+}
+
+.form__label--item {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333333;
+}
+
+.form__input--text input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 15px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    background-color: #ffffff;
+    color: #333333;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form__input--text input:focus {
+    border-color: #ff4d4f;
+    box-shadow: 0 0 0 3px rgba(255, 77, 79, 0.1);
+    outline: none;
+}
+
+.form__error p {
+    color: #ff4d4f;
+    font-size: 13px;
+    margin: 6px 0 0 0;
+    font-weight: 500;
+}
+
+.form__button-submit {
+    width: 100%;
+    padding: 14px;
+    background-color: #ff4d4f;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s;
+}
+
+.form__button-submit:hover {
+    background-color: #e03e41;
+}
+
+.form__button-to-login {
+    display: block;
+    text-align: center;
+    margin-top: 24px;
+    color: #0056b3;
+    font-size: 14px;
+    text-decoration: none;
+    transition: text-decoration 0.2s;
+}
+
+.form__button-to-login:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .login-form__content {
+        height: auto;
+        padding: 20px 15px;
+        box-shadow: none;
+        background-color: transparent;
+    }
+}
