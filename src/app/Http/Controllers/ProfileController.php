@@ -5,9 +5,21 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Item;
 
 class ProfileController extends Controller
 {
+    public function index(Request $request)
+    {
+        $user = Auth::user();
+        $currentPage = $request->query('page', 'sell');
+        $sellItems = Item::where('user_id', $user->id)->get();
+        $buyItems = Item::whereHas('order', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->get();
+        return view('profile', compact('user', 'sellItems', 'buyItems', 'currentPage'));
+    }
+
     public function edit()
     {
         $user = Auth::user();
@@ -17,14 +29,6 @@ class ProfileController extends Controller
     public function update(Request $request)
     {
         $user = Auth::user();
-
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'img_url' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'postal_code' => 'nullable|string|max:8',
-            'address' => 'nullable|string|max:255',
-            'building' => 'nullable|string|max:255',
-        ]);
 
         if ($request->hasFile('img_url')) {
             if($user->img_url){

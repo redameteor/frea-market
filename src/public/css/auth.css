@@ -1,16 +1,14 @@
 .auth-form__content {
-    background-color: #ffffff;
     width: 100%;
     max-width: 680px;
     height: 678px;
     margin: 60px auto;
-    padding: 60px;
+    padding: 120px 60px 60px 60px;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -21,17 +19,22 @@
 
 .auth-heading p {
     font-size: 16px;
+    font-weight: bold;
     line-height: 1.8;
     color: #333333;
     margin: 0;
 }
 
-.auth__botton {
+.auth__botton-group {
     width: 100%;
     max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .auth__button-auth {
+    display: block;
     width: 100%;
     padding: 14px;
     background-color: #d1d0d0;
@@ -43,10 +46,17 @@
     cursor: pointer;
     transition: background-color 0.2s;
     text-align: center;
+    text-decoration: none;
+    margin-bottom: 24px;
 }
 
 .auth__button-auth:hover {
-    background-color: #e03e41;
+    background-color: #bcbcbc;
+}
+
+.auth__resend-form {
+    width: 100%;
+    text-align: center;
 }
 
 .auth__button-mail {

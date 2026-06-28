@@ -58,3 +58,4 @@
     </div>
     <button type="submit" class="btn">更新する</button>
 </form>
+@endsection

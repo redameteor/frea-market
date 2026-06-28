@@ -81,6 +81,7 @@ body {
 
 .header__nav-sell-button {
     background-color: #ffffff;
+    color: #000000;
     padding: 10px 24px;
     border-radius: 5px;
 }
@@ -92,17 +93,25 @@ main {
     min-height: calc(100vh - 150px);
 }
 
-/* タブレット・小さめのPC（画面幅 1024px 以下） */
+/* タブレット（画面幅 1024px 以下） */
 @media (max-width: 1024px) {
     .header__inner {
         gap: 15px;
+        padding: 0 20px;
     }
 }
 
-/* 小さめノートPC・スマホ（画面幅 768px 以下） */
+/* スマホ（画面幅 768px 以下） */
 @media (max-width: 768px) {
+
+    .header {
+        height: auto;
+    }
+
     .header__inner {
         flex-wrap: wrap;
+        height: auto;
+        padding: 10px 0;
     }
 
     .header__logo {
@@ -118,6 +127,6 @@ main {
         flex: none;
         width: 100%;
         max-width: 100%;
-        margin-top: 10px;
+        margin-top: 15px;
     }
 }

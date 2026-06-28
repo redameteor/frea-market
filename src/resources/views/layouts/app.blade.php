@@ -20,10 +20,10 @@
                 @csrf
                 <div class="header-form__group-content">
                     <div class="header-form__input--text">
-                        <input type="text" class="header-form__text" name="detail" placeholder="なにをお探しですか？" value="{{ old('detail') }}">
+                        <input type="text" class="header-form__text" name="keyword" placeholder="なにをお探しですか？" value="{{ old('keyword') }}">
                     </div>
                     <div class="header-form__error">
-                        @error('detail')
+                        @error('keyword')
                             <p>{{ $message }}</p>
                         @enderror
                     </div>
@@ -31,17 +31,24 @@
             </form>
             <div class="header__nav">
                 <ul class="header__nav-list">
-                    @if (request()->is(''))
+                    @if (Auth::check())
                     <li class="header__nav-item">
                         <a class="header__nav-log-button" href="/logout">ログアウト</a>
                     </li>
                     <li class="header__nav-item">
                         <a class="header__nav-prof-button" href="/profile">マイページ</a>
                     </li>
+                    @else
+                    <li class="header__nav-item">
+                        <a class="header__nav-log-button" href="/login">ログイン</a>
+                    </li>
+                    <li class="header__nav-item">
+                        <a class="header__nav-prof-button" href="/register">会員登録</a>
+                    </li>
+                    @endif
                     <li class="header__nav-item">
                         <a class="header__nav-sell-button" href="/sell">出品</a>
                     </li>
-                    @endif
                 </ul>
             </div>
         </div>
