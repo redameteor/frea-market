@@ -9,7 +9,7 @@
     <h1>住所変更</h1>
 </div>
 <div Class="address-form__content">
-    <form class="form" action="/address" method="post">
+    <form class="form" action="{{ route('purchase.address.update', ['item_id' => $item_id]) }}" method="post">
     @csrf
     <div class="form__group">
             <div class="form__group-title">
@@ -17,11 +17,11 @@
             </div>
             <div class="form__group-content">
                 <div class="form__input--text">
-                    <input type="text" name="postal_code" value="{{ old('postal_code') }}">
+                    <input type="text" name="postal_code" value="{{ old('postal_code', $user->postal_code) }}">
                 </div>
                 <div class="form__error">
                     @error('postal_code')
-                        <p>{{ $message }}</p>
+                        <p class="error-text">{{ $message }}</p>
                     @enderror
                 </div>
             </div>
@@ -32,11 +32,11 @@
             </div>
             <div class="form__group-content">
                 <div class="form__input--text">
-                    <input type="text" name="address" value="{{ old('address') }}">
+                    <input type="text" name="address" value="{{ old('address', $user->address) }}">
                 </div>
                 <div class="form__error">
                     @error('address')
-                        <p>{{ $message }}</p>
+                        <p class="error-text">{{ $message }}</p>
                     @enderror
                 </div>    
             </div>
@@ -47,11 +47,11 @@
             </div>
             <div class="form__group-content">
                 <div class="form__input--text">
-                    <input type="text" name="building_name" value="{{ old('building_name') }}">
+                    <input type="text" name="building" value="{{ old('building', $user->building) }}">
                 </div>
                 <div class="form__error">
-                    @error('building_name')
-                        <p>{{ $message }}</p>
+                    @error('building')
+                        <p class="error-text">{{ $message }}</p>
                     @enderror
                 </div>    
             </div>

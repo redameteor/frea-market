@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,8 +27,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/mypage', [ProfileController::class, 'index'])->name('profile');
     Route::get('/mypage/profile', [ProfileController::class, 'edit'])->name('prof-edit');
     Route::put('/mypage', [ProfileController::class, 'update'])->name('profile.update');
-    // コメント送信
+    // コメント送信・いいね関連のルート
     Route::post('/items/{item_id}/comment', [CommentController::class, 'store'])->name('comment.store');
+    Route::post('/items/{item_id}/like', [ItemController::class, 'like'])->name('item.like');
     // 商品購入関連のルート
     Route::get('/purchase/{item_id}', [OrderController::class, 'create'])->name('purchase');
     Route::post('/purchase/{item_id}', [OrderController::class, 'store'])->name('purchase.store');

@@ -14,6 +14,11 @@ class Item extends Model
         'description',
         'price',
         'image_path',
+        'is_sold',
+    ];
+
+    protected $casts = [
+        'is_sold' => 'boolean',
     ];
 
     public function comments()
@@ -24,5 +29,10 @@ class Item extends Model
     public function order()
     {
         return $this->hasOne(Order::class);
+    }
+
+    public function likedUsers()
+    {
+        return $this->belongsToMany(User::class, 'likes');
     }
 }

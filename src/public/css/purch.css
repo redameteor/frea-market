@@ -1,0 +1,128 @@
+.purchase-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.purchase-form {
+    display: flex;
+    gap: 40px;
+}
+
+.purchase__main {
+    flex: 1;
+}
+
+.purchase__section {
+    border-bottom: 1px solid #ddd;
+    padding: 24px 0;
+}
+
+.item-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.item-info__image img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.item-name {
+    font-size: 22px;
+    margin-bottom: 8px;
+}
+
+.item-price {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.select-payment {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.delivery-address__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.btn-change-address {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.purchase__sidebar {
+    width: 340px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 24px;
+    height: fit-content;
+    background-color: #fff;
+}
+
+.summary-table {
+    width: 100%;
+    margin-bottom: 24px;
+    border-collapse: collapse;
+}
+
+.summary-table th,
+.summary-table td {
+    padding: 12px 0;
+    text-align: left;
+}
+
+.summary-table td {
+    text-align: right;
+}
+
+.total-row {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.total-price {
+    color: #ff4d4d;
+}
+
+.btn-submit-purchase {
+    width: 100%;
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 16px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-submit-purchase:hover {
+    background-color: #e03a3a;
+}
+
+.btn-submit-purchase:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+.error-text {
+    color: #ff4d4d;
+    font-size: 12px;
+    margin-top: 8px;
+    text-align: center;
+}

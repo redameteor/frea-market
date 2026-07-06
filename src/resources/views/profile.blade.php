@@ -17,7 +17,7 @@
             @endif
         </div>
         <h1 class="profile-name">{{ $user->name }}</h1>
-        <a href="{{ route('profile.edit') }}" class="btn-profile-edit">プロフィールを編集</a>
+        <a href="{{ route('prof.edit') }}" class="btn-prof-edit">プロフィールを編集</a>
     </div>
 
     <input type="radio" id="tab-sell" name="profile-tab" {{ $currentTab === 'buy' ? '' : 'checked' }}>

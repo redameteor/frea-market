@@ -22,6 +22,7 @@ class CreateItemsTable extends Migration
             $table->text('description');
             $table->string('condition');
             $table->string('img_url')->nullable();
+            $table->boolean('is_sold')->default(false);
             $table->timestamps();
         });
     }

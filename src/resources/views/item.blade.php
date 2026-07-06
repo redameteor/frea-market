@@ -8,7 +8,7 @@
 <div class="item-container">
     <div class="item__image-box">
         <img src="{{ asset('storage/' . $item->img_url) }}" alt="{{ $item->name }}">
-        @if($item->order)
+        @if($item->is_sold)
             <div class="sold-label">Sold</div>
         @endif
     </div>
@@ -19,12 +19,28 @@
             <p class="item-price">
                 <span class="currency">¥</span>{{ number_format($item->price) }} <span class="tax-included">(税込)</span>
             </p>
+            <div class="item__stats">
+                <div class="stat-item like-container">
+                    <button class="btn-like" data-item-id="{{ $item->id }}">
+                    @if(Auth::check() && Auth::user()->likes()->where('item_id', $item->id)->exists())
+                        <img src="{{ asset('img/ハートロゴ_ピンク.png') }}" class="like-icon" alt="いいね済">
+                    @else
+                        <img src="{{ asset('img/ハートロゴ_デフォルト.png') }}" class="like-icon" alt="未いいね">
+                    @endif
+                    </button>
+                    <span class="like-count">{{ $item->likedUsers()->count() }}</span>
+                </div>
+                <div class="stat-item comment-container">
+                    <img src="{{ asset('img/comment_logo.png') }}" class="comment-icon" alt="コメント">
+                    <span class="comment-count">{{ $item->comments->count() ?? 0 }}</span>
+                </div>
+            </div>
         </div>
         <div class="item__actions">
-            @if($item->order)
+            @if($item->is_sold)
                 <button class="btn-purchase btn-purchase--disabled" disabled>売り切れました</button>
             @else
-                <a href="#" class="btn-purchase btn-purchase--active">
+                <a href="{{ route('purchase', ['item_id' => $item->id])}}" class="btn-purchase btn-purchase--active">
                     購入手続きへ
                 </a>
             @endif
@@ -85,6 +101,9 @@
                             <label for="comment-textarea" class="form-label">商品へのコメント</label>
                             <textarea id="comment-textarea" name="content" rows="4" class="comment-textarea" required></textarea>
                             <button type="submit" class="btn-comment-submit">コメントを送信する</button>
+                            @error('content')
+                                <p class="error-text">{{ $message }}</p>
+                            @enderror
                         </form>
                     @else
                         <div class="comment-login-alert">
@@ -96,4 +115,47 @@
         </div>
     </div>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const likeBtn = document.querySelector('.btn-like');
+
+    if (likeBtn) {
+        // ボタンがクリックされたときの動き
+        likeBtn.addEventListener('click', function () {
+            const itemId = this.dataset.itemId;
+
+            // サーバーへいいねの切り替えをリクエスト
+            fetch(`/items/${itemId}/like`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // いいねの数字をその場で書き換え
+                const likeCountSpan = document.querySelector('.like-count');
+                if (likeCountSpan) {
+                    likeCountSpan.textContent = data.likeCount;
+                }
+
+                // ハートの画像をその場で切り替え
+                const likeImg = likeBtn.querySelector('.like-icon');
+                if (likeImg) {
+                    if (data.isLiked) {
+                        likeImg.src = "{{ asset('img/ハートロゴ_ピンク.png') }}";
+                        likeImg.alt = "いいね済";
+                    } else {
+                        likeImg.src = "{{ asset('img/ハートロゴ_デフォルト.png') }}";
+                        likeImg.alt = "未いいね";
+                    }
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
+    }
+});
+</script>
 @endsection

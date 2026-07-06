@@ -87,6 +87,25 @@
     margin-left: 8px;
 }
 
+.item__stats {
+    display: flex;
+    gap: 40px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.btn-like {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
 .item__actions {
     width: 100%;
 }

@@ -19,7 +19,7 @@
                 <a href="{{ route('item.show', ['item_id' => $item->id]) }}" class="item-card">
                     <img src="{{ asset('storage/' . $item->img_url) }}" alt="{{ $item->name }}">
                     <p class="item-name">{{ $item->name }}</p>
-                    @if($item->order) 
+                    @if($item->is_sold) 
                         <span class="sold-label">Sold</span>
                     @endif
                 </a>
@@ -35,7 +35,7 @@
                     <a href="{{ route('item.show', ['item_id' => $item->id]) }}" class="item-card">
                         <img src="{{ asset('storage/' . $item->img_url) }}" alt="{{ $item->name }}">
                         <p class="item-name">{{ $item->name }}</p>
-                        @if($item->order) 
+                        @if($item->is_sold) 
                             <span class="sold-label">Sold</span>
                         @endif
                     </a>
@@ -44,7 +44,7 @@
                 @endforelse
             </div>
         @else
-            <p class="login-alert">マイリストを見るにはログインが必要です。</p>
+        <p class="login-alert">マイリストを見るには<a href="{{ route('login') }}">ログイン</a>が必要です。</p>
         @endif
     </div>
 </div>

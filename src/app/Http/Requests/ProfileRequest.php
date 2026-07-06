@@ -26,7 +26,7 @@ class ProfileRequest extends FormRequest
         return [
             'name'        => 'required|string|max:20',
             'img_url'     => 'nullable|image|mimes:jpeg,png|max:2048',
-            'postal_code' => 'required|string|size:8|regex:/^\d{3}-d{4}$/',
+            'postal_code' => 'required|string|size:8|regex:/^\d{3}-\d{4}$/',
             'address'     => 'required|string|max:255',
             'building'    => 'nullable|string|max:255',
         ];
