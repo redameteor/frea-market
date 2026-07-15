@@ -5,6 +5,18 @@
 @endsection
 
 @section('content')
+
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
+
 <div class="purchase-container">
     <form action="{{ route('purchase.store', ['item_id' => $item->id]) }}" method="POST" class="purchase-form">
         @csrf
@@ -37,17 +49,17 @@
                     <a href="{{ route('purchase.address.edit', ['item_id' => $item->id]) }}" class="btn-change-address">変更する</a>
                 </div>
                 <div class="delivery-address__content">
-                    <p class="postal-code">〒 {{ $user->delivery_postal_code ?? '未登録' }}</p>
+                    <p class="postal-code">〒 {{ $user->postal_code ?? '未登録' }}</p>
                     @error('delivery_postal_code')
                         <p class="error-text">{{ $message }}</p>
                     @enderror
-                    <p class="address">{{ $user->delivery_address ?? '住所を登録してください' }} {{ $user->delivery_building ?? '' }}</p>
+                    <p class="address">{{ $user->address ?? '住所を登録してください' }} {{ $user->building ?? '' }}</p>
                     @error('delivery_address')
                         <p class="error-text">{{ $message }}</p>
                     @enderror
-                    <input type="hidden" name="delivery_postal_code" value="{{ $user->delivery_postal_code }}">
-                    <input type="hidden" name="delivery_address" value="{{ $user->delivery_address }}">
-                    <input type="hidden" name="delivery_building" value="{{ $user->delivery_building }}">
+                    <input type="hidden" name="delivery_postal_code" value="{{ $user->postal_code }}">
+                    <input type="hidden" name="delivery_address" value="{{ $user->address }}">
+                    <input type="hidden" name="delivery_building" value="{{ $user->building }}">
                 </div>
             </div>
         </div>
@@ -67,7 +79,7 @@
                 </tr>
             </table>
 
-            <button type="submit" class="btn-submit-purchase" {{ empty($user->address) ? 'disabled' : '' }}>
+            <button type="submit" class="btn-submit-purchase" {{ empty($user->address) || $item->status !== 'available' ? 'disabled' : '' }}>
                 購入する
             </button>
             @if(empty($user->address))

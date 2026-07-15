@@ -22,7 +22,7 @@ class CreateItemsTable extends Migration
             $table->text('description');
             $table->string('condition');
             $table->string('img_url')->nullable();
-            $table->boolean('is_sold')->default(false);
+            $table->string('status')->default('available'); // 商品の状態(販売中、決済中、売却済み など）
             $table->timestamps();
         });
     }

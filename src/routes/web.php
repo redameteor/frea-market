@@ -33,6 +33,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // 商品購入関連のルート
     Route::get('/purchase/{item_id}', [OrderController::class, 'create'])->name('purchase');
     Route::post('/purchase/{item_id}', [OrderController::class, 'store'])->name('purchase.store');
+    Route::get('/purchase/success/{item_id}', [OrderController::class, 'success'])->name('purchase.success');
+    Route::get('/purchase/cancel/{item_id}', [OrderController::class, 'cancel'])->name('purchase.cancel');
     Route::get('/purchase/address/{item_id}', [OrderController::class, 'editAddress'])->name('purchase.address.edit');
     Route::post('/purchase/address/{item_id}', [OrderController::class, 'updateAddress'])->name('purchase.address.update');
     // 商品出品関連のルート
