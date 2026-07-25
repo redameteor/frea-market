@@ -34,9 +34,9 @@
                 <h3 class="section-title">支払い方法</h3>
                 <div class="form-group">
                     <select name="payment_method" class="select-payment" required>
-                        <option value="" disabled selected>選択してください</option>
-                        <option value="konbini">コンビニ払い</option>
-                        <option value="card">クレジットカード</option>
+                        <option value="" disabled selected {{ old('payment_method') == '' ? 'selected' : '' }}>選択してください</option>
+                        <option value="konbini" {{ old('payment_method') == 'konbini' ? 'selected' : '' }}>コンビニ払い</option>
+                        <option value="card" {{ old('payment_method') == 'card' ? 'selected' : '' }}>クレジットカード</option>
                     </select>
                     @error('payment_method')
                         <p class="error-text">{{ $message }}</p>
@@ -57,9 +57,9 @@
                     @error('delivery_address')
                         <p class="error-text">{{ $message }}</p>
                     @enderror
-                    <input type="hidden" name="delivery_postal_code" value="{{ $user->postal_code }}">
-                    <input type="hidden" name="delivery_address" value="{{ $user->address }}">
-                    <input type="hidden" name="delivery_building" value="{{ $user->building }}">
+                    <input type="hidden" name="delivery_postal_code" value="{{ old('delivery_postal_code', $user->postal_code) }}">
+                    <input type="hidden" name="delivery_address" value="{{ old('delivery_address', $user->address) }}">
+                    <input type="hidden" name="delivery_building" value="{{ old('delivery_building', $user->building) }}">
                 </div>
             </div>
         </div>
@@ -89,9 +89,23 @@
     </form>
 </div>
 <script>
-    document.querySelector('.select-payment').addEventListener('change', function(e) {
-        const text = e.target.options[e.target.selectedIndex].text;
-        document.getElementById('selected-payment-display').textContent = text;
+    document.addEventListener('DOMContentLoaded', function() {
+        const paymentSelect = document.querySelector('.select-payment');
+        const paymentDisplay = document.getElementById('selected-payment-display');
+
+        function updateDisplay() {
+            if (paymentSelect.selectedIndex > 0) {
+                paymentDisplay.textContent = paymentSelect.options[paymentSelect.selectedIndex].text;
+            } else {
+                paymentDisplay.textContent = '未選択';
+            }
+        }
+
+        // 変更時イベント
+        paymentSelect.addEventListener('change', updateDisplay);
+
+        // ページ読み込み時（old値で初期選択されている場合の反映）
+        updateDisplay();
     });
 </script>
 @endsection

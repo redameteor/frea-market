@@ -49,8 +49,15 @@ class OrderController extends Controller
                     'quantity' => 1,
                 ]],
                 'mode' => 'payment',
-                'success_url' => route('purchase.success', ['item_id' => $item->id]),
-                'cancel_url' => route('purchase.cancel', ['item_id' => $item->id]), // 👈 キャンセル用ルートに変更
+                // 配送先情報をメタデータとして保存
+                'metadata' => [
+                    'delivery_postal_code' => $request->delivery_postal_code,
+                    'delivery_address' => $request->delivery_address,
+                    'delivery_building' => $request->delivery_building,
+                ],
+                // 成功時とキャンセル時のリダイレクトURL 末尾に?session_id={CHECKOUT_SESSION_ID} を追加（Stripeが自動で実際のIDに置き換えてくれる）
+                'success_url' => route('purchase.success', ['item_id' => $item->id]) .'?session_id={CHECKOUT_SESSION_ID}',
+                'cancel_url' => route('purchase.cancel', ['item_id' => $item->id]), // キャンセル用ルート
             ]);
             return redirect($checkout_session->url);
         }
@@ -72,7 +79,7 @@ class OrderController extends Controller
         }
     }
 
-    public function success($item_id)
+    public function success(Request $request, $item_id)
     {
         $item = Item::findOrFail($item_id);
         
@@ -80,15 +87,34 @@ class OrderController extends Controller
         if ($item->status === 'sold') {
             return redirect()->route('index')->with('success', 'この商品はすでに購入済みです');
         }
+        // StripeのセッションIDを取得し、stripeからmetadataを引き出す
+        $sessionId = $request->query('session_id');
 
-        DB::transaction(function () use ($item) {
+        if ($sessionId) {
+            Stripe::setApiKey(env('STRIPE_SECRET'));
+
+            // Stripeに「このセッションの詳細ちょうだい」とリクエスト
+            $session = Session::retrieve($sessionId);
+
+            // metadata から住所を取り出す（もし空ならログインユーザーのデフォルト住所にする保険付き）
+            $postal_code = $session->metadata->delivery_postal_code ?? Auth::user()->postal_code;
+            $address = $session->metadata->delivery_address ?? Auth::user()->address;
+            $building = $session->metadata->delivery_building ?? Auth::user()->building;
+        } else {
+            // 万が一 session_id が取れなかった場合のフォールバック（予備処理）
+            $postal_code = Auth::user()->postal_code;
+            $address = Auth::user()->address;
+            $building = Auth::user()->building;
+        }
+
+        DB::transaction(function () use ($item, $postal_code, $address, $building) {
             Order::create([
                 'user_id' => Auth::id(),
                 'item_id' => $item->id,
                 'payment_method' => 'card',
-                'delivery_postal_code' => Auth::user()->postal_code,
-                'delivery_address' => Auth::user()->address,
-                'delivery_building' => Auth::user()->building,
+                'delivery_postal_code' => $postal_code,
+                'delivery_address' => $address,
+                'delivery_building' => $building,
             ]);
             $item->update(['status' => 'sold']);
         });

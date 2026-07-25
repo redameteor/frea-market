@@ -10,15 +10,15 @@ class Item extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'name',
+        'brand',
+        'condition',
+        'price',
         'description',
         'price',
-        'image_path',
-        'is_sold',
-    ];
-
-    protected $casts = [
-        'is_sold' => 'boolean',
+        'image_url',
+        'status',
     ];
 
     public function comments()
@@ -34,5 +34,17 @@ class Item extends Model
     public function likedUsers()
     {
         return $this->belongsToMany(User::class, 'likes');
+    }
+
+    // カテゴリーとのリレーション（中間テーブル名 item_categories）
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class, 'item_categories');
+    }
+
+    // 出品者（User）とのリレーション
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

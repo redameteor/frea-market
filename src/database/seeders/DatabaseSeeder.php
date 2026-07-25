@@ -10,9 +10,12 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        $user = User::factory()->create([
+        $this->call([CategorySeeder::class]);
+
+        $user = User::firstOrCreate([
+            'email' => 'test123@example.com',
+        ], [
             'name' => 'テストユーザー',
-            'email' => 'test@example.com',
             'password' => bcrypt('password'),
         ]);
 
@@ -24,7 +27,7 @@ class DatabaseSeeder extends Seeder
                 'description' => 'スタイリッシュなデザインのメンズ腕時計',
                 'img_url' => 'MensClock_coachtech.jpg',
                 'condition' => '良好',
-                'is_sold' => false,
+                'status' => 'available',
             ],
             [
                 'name' => 'HDD',
@@ -33,7 +36,7 @@ class DatabaseSeeder extends Seeder
                 'description' => '高速で信頼性の高いハードディスク',
                 'img_url' => 'HDD_coachtech.jpg',
                 'condition' => '目立った傷や汚れなし',
-                'is_sold' => false,
+                'status' => 'available',
             ],
             [
                 'name' => '玉ねぎ3束',
@@ -42,7 +45,7 @@ class DatabaseSeeder extends Seeder
                 'description' => '新鮮な玉ねぎ3束のセット',
                 'img_url' => 'onion_coachtech.jpg',
                 'condition' => 'やや傷や汚れあり',
-                'is_sold' => false,
+                'status' => 'available',
             ],
             [
                 'name' => '革靴',
@@ -51,7 +54,7 @@ class DatabaseSeeder extends Seeder
                 'description' => 'クラシックなデザインの革靴',
                 'img_url' => 'LeatherShoes_coachtech.jpg',
                 'condition' => '状態が悪い',
-                'is_sold' => false,
+                'status' => 'available',
             ],
             [
                 'name' => 'ノートPC',
@@ -60,7 +63,7 @@ class DatabaseSeeder extends Seeder
                 'description' => '高性能なノートパソコン',
                 'img_url' => 'Laptop_coachtech.jpg',
                 'condition' => '良好',
-                'is_sold' => false,
+                'status' => 'available',
             ],
             [
                 'name' => 'マイク',
@@ -69,7 +72,7 @@ class DatabaseSeeder extends Seeder
                 'description' => '高音質のレコーディング用マイク',
                 'img_url' => 'Mic_coachtech.jpg',
                 'condition' => '目立った傷や汚れなし',
-                'is_sold' => false,
+                'status' => 'available',
             ],
             [
                 'name' => 'ショルダーバッグ',
@@ -78,7 +81,7 @@ class DatabaseSeeder extends Seeder
                 'description' => 'おしゃれなショルダーバッグ',
                 'img_url' => 'bag_coachtech.jpg',
                 'condition' => 'やや傷や汚れあり',
-                'is_sold' => false,
+                'status' => 'available',
             ],
             [
                 'name' => 'タンブラー',
@@ -87,7 +90,7 @@ class DatabaseSeeder extends Seeder
                 'description' => '使いやすいタンブラー',
                 'img_url' => 'Tumbler_coachtech.jpg',
                 'condition' => '状態が悪い',
-                'is_sold' => false,
+                'status' => 'available',
             ],
             [
                 'name' => 'コーヒーミル',
@@ -96,7 +99,7 @@ class DatabaseSeeder extends Seeder
                 'description' => '手動のコーヒーミル',
                 'img_url' => 'コーヒーミル_coachtech.jpg',
                 'condition' => '良好',
-                'is_sold' => false,
+                'status' => 'available',
             ],
             [
                 'name' => 'メイクセット',
@@ -105,7 +108,7 @@ class DatabaseSeeder extends Seeder
                 'description' => '便利なメイクアップセット',
                 'img_url' => 'メイクセット_coachtech.jpg',
                 'condition' => '目立った傷や汚れなし',
-                'is_sold' => false,
+                'status' => 'available',
             ],
         ];
 

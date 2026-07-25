@@ -130,11 +130,24 @@ document.addEventListener('DOMContentLoaded', function () {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}',
-                    'Content-Type': 'application/json'
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
                 }
             })
-            .then(response => response.json())
+            .then(response => {
+                // 未ログイン時はログインページへリダイレクト
+                if (response.status === 401) {
+                    window.location.href = "{{ route('login') }}";
+                    return;
+                }
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
             .then(data => {
+                if (!data) return; // データがない場合は何もしない
+               
                 // いいねの数字をその場で書き換え
                 const likeCountSpan = document.querySelector('.like-count');
                 if (likeCountSpan) {

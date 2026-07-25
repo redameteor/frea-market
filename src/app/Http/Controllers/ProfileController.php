@@ -18,7 +18,7 @@ class ProfileController extends Controller
         $currentTab = $request->query('page', 'sell');
 
         // ここで、売った商品と買った商品を取得する
-        $sellItems = Item::where('user_id', $user->id)->get();
+        $sellItems = Item::where('user_id', $user->id)->with('order')->get();
         $buyItems = Item::whereHas('order', function ($query) use ($user) {
             $query->where('user_id', $user->id);
         })->get();
@@ -51,6 +51,6 @@ class ProfileController extends Controller
         $user->building = $request->input('building');
         $user->save();
 
-        return redirect('/');
+        return redirect()->route('profile')->with('success', 'プロフィールを更新しました');
     }
 }
