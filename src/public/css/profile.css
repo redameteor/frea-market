@@ -1,17 +1,35 @@
+.item-page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
 .profile-header {
     display: flex;
     align-items: center;
-    gap: 30px;
-    margin-bottom: 50px;
+    justify-content: center;
+    margin-bottom: 40px;
+    justify-content: space-between;
+    max-width: 650px;
+    margin: 0 auto 40px auto;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .profile-avatar {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     overflow: hidden;
-    background-color: #f0f0f0;
+    background-color: #f5f5f5;
     flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .profile-avatar img {
@@ -33,49 +51,50 @@
     margin: 0;
 }
 
-.btn-profile-edit {
+.btn-prof-edit {
     display: inline-block;
-    padding: 8px 20px;
-    border: 2px solid #ff4d4d;
+    padding: 8px 18px;
+    border: 1px solid #ff4d4d;
     color: #ff4d4d;
-    text-decoration: none;
+    border-radius: 4px;
     font-weight: bold;
-    border-radius: 50px;
-    transition: all 0.2s;
-    white-space: nowrap;
-    margin-left: 20px;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.2s, color 0.2s;
 }
 
-.btn-profile-edit:hover {
+.btn-prof-edit:hover {
     background-color: #ff4d4d;
     color: #ffffff;
 }
 
-input[name="profile-tab"] {
-    display: none;
+.tab-menu {
+    display: flex;
+    gap: 40px;
+    margin-bottom: -1px;
 }
 
-.sell-content,
-.buy-content {
-    display: none;
+.tab-item {
+    font-size: 18px;
+    font-weight: 500;
+    color: #666666;
+    cursor: pointer;
+    padding-bottom: 8px;
+    transition: color 0.2s;
+    position: relative;
+    text-decoration: none;
 }
 
-#tab-sell:checked~.sell-content {
-    display: block;
+.tab-item:hover {
+    color: #333333;
 }
 
-#tab-buy:checked~.buy-content {
-    display: block;
-}
-
-#tab-sell:checked~.tab-menu label[for="tab-sell"],
-#tab-buy:checked~.tab-menu label[for="tab-buy"] {
+.tab-item.active {
     color: #ff4d4d;
     font-weight: bold;
 }
 
-#tab-sell:checked~.tab-menu label[for="tab-sell"]::after,
-#tab-buy:checked~.tab-menu label[for="tab-buy"]::after {
+.tab-item.active::after {
     content: "";
     position: absolute;
     bottom: 0;
@@ -84,4 +103,80 @@ input[name="profile-tab"] {
     height: 3px;
     background-color: #ff4d4d;
     border-radius: 2px;
+}
+
+.tab-line {
+    border: none;
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 0 0 30px 0;
+}
+
+.content-area {
+    width: 100%;
+}
+
+.item-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 30px 20px;
+}
+
+.item-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.item-card img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    transition: transform 0.2s;
+}
+
+.item-card:hover img {
+    transform: scale(1.02);
+}
+
+.item-name {
+    margin: 10px 0 0 0;
+    font-size: 15px;
+    color: #333333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.sold-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 77, 77, 0.9);
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 4px 12px;
+    border-bottom-right-radius: 8px;
+    text-transform: uppercase;
+    z-index: 10;
+}
+
+.no-items {
+    text-align: center;
+    padding: 60px 20px;
+    color: #666666;
+    font-size: 16px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    border: 1px dashed #cccccc;
+    grid-column: 1 / -1;
 }

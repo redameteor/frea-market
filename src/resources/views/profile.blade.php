@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/index.css') }}">
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}">
 @endsection
 
@@ -9,14 +8,16 @@
 <div class="item-page-container">
 
     <div class="profile-header">
-        <div class="profile-avatar">
-            @if($user->img_url)
-                <img src="{{ asset('storage/' . $user->img_url) }}" alt="ユーザー画像">
-            @else
-                <div class="default-avatar"></div>
-            @endif
+        <div class="profile-info">
+            <div class="profile-avatar">
+                @if($user->img_url)
+                    <img src="{{ asset('storage/' . $user->img_url) }}" alt="ユーザー画像">
+                @else
+                    <div class="default-avatar"></div>
+                @endif
+            </div>
+            <h1 class="profile-name">{{ $user->name }}</h1>
         </div>
-        <h1 class="profile-name">{{ $user->name }}</h1>
         <a href="{{ route('prof-edit') }}" class="btn-prof-edit">プロフィールを編集</a>
     </div>
     <div class="tab-menu">

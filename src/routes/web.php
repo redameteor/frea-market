@@ -42,6 +42,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/purchase/address/{item_id}', [OrderController::class, 'updateAddress'])->name('purchase.address.update');
     
     // 商品出品関連のルート
-    Route::get('/sell', [ItemController::class, 'create'])->name('item.create');
-    Route::post('/sell', [ItemController::class, 'store'])->name('item.store');
+    Route::get('/sell', [ItemController::class, 'create'])->name('sell.create');
+    Route::post('/sell', [ItemController::class, 'store'])->name('sell.store');
 });

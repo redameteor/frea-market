@@ -18,6 +18,6 @@ class CommentController extends Controller
             'content' => $request->content,
         ]);
 
-        return redirect()->route('items.show', ['item_id' => $item_id]);
+        return redirect()->route('item.show', ['item_id' => $item_id]);
     }
 }

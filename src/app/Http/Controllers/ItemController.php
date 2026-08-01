@@ -25,10 +25,10 @@ class ItemController extends Controller
         $recommendItems = $recommendQuery->latest()->get();
 
         //  マイリストの初期値はnull
-        $mylistItems = [];
+        $mylistItems = collect();
         
         // もし選ばれているタブが「mylist」で、かつユーザーがログインしている場合だけ実行
-        if ($currentTab === 'mylist' && Auth::check()){
+        if (Auth::check()){
             $mylistQuery = Auth::user()->likes();
             if ($keyword) {
                 $mylistQuery->where('name', 'like', "%{$keyword}%");
@@ -76,7 +76,7 @@ class ItemController extends Controller
         // 商品の状態（condition）の選択肢を定義
         $conditions = ['良好', '目立った傷や汚れなし', 'やや傷や汚れあり', '状態が悪い'];
 
-        return view('items.create', compact('categories', 'conditions'));
+        return view('sell', compact('categories', 'conditions'));
     }
 
     // 出品商品の保存処理

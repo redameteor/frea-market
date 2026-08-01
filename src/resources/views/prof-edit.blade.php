@@ -12,7 +12,6 @@
     @csrf
     @method('PUT')
     <div class="form-group">
-        <label class="form-label">プロフィール画像</label>
         <div class="profile-image-group">
             <div class="image-preview">
                 @if($user->img_url)

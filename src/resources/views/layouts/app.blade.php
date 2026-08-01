@@ -14,7 +14,9 @@
     <header class="header">
         <div class="header__inner">
             <div class="header__logo">
-                <img src="{{ asset('img/COACHTECHヘッダーロゴ.png') }}" alt="ロゴ">
+                <a href="{{ route('index') }}">
+                    <img src="{{ asset('img/COACHTECHヘッダーロゴ.png') }}" alt="ロゴ">
+                </a>
             </div>
             <form class="header-form" action="{{ route('search') }}" method="get">
                 @csrf
@@ -33,21 +35,24 @@
                 <ul class="header__nav-list">
                     @if (Auth::check())
                     <li class="header__nav-item">
-                        <a class="header__nav-log-button" href="/logout">ログアウト</a>
+                        <form method="POST" action="{{ route('logout') }}" class="header__logout-form">
+                            @csrf
+                            <button type="submit" class="header__nav-log-button">ログアウト</button>
+                        </form>
                     </li>
                     <li class="header__nav-item">
-                        <a class="header__nav-prof-button" href="/profile">マイページ</a>
+                        <a class="header__nav-prof-button" href="{{ route('profile') }}">マイページ</a>
                     </li>
                     @else
                     <li class="header__nav-item">
-                        <a class="header__nav-log-button" href="/login">ログイン</a>
+                        <a class="header__nav-log-button" href="{{ route('login') }}">ログイン</a>
                     </li>
                     <li class="header__nav-item">
-                        <a class="header__nav-prof-button" href="/register">会員登録</a>
+                        <a class="header__nav-prof-button" href="{{ route('register') }}">会員登録</a>
                     </li>
                     @endif
                     <li class="header__nav-item">
-                        <a class="header__nav-sell-button" href="/sell">出品</a>
+                        <a class="header__nav-sell-button" href="{{ route('sell.create') }}">出品</a>
                     </li>
                 </ul>
             </div>

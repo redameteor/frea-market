@@ -14,6 +14,15 @@ use Stripe\Checkout\Session;
 
 class OrderController extends Controller
 {
+    // 購入画面の表示
+    public function create($item_id)
+    {
+        $item = Item::findOrFail($item_id);
+        $user = Auth::user();
+
+        return view('purch', compact('item', 'user'));
+    }
+
     public function store(PurchaseRequest $request, $item_id)
     {
         // 同時購入を防ぐため、最初からトランザクション

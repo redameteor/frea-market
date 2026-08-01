@@ -43,10 +43,10 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         Fortify::verifyEmailView(function () {
-            return view('auth.verify-email');
+            return view('auth.auth');
         });
 
-        // 🚀 流れ①：会員登録ボタンを押した直後 ➡️ メール認証待ち画面へ強制移動
+        // 会員登録ボタンを押した直後 メール認証待ち画面へ強制移動
         $this->app->instance(RegisterResponse::class, new class implements RegisterResponse {
             public function toResponse($request) {
                 return $request->wantsJson()
@@ -55,16 +55,16 @@ class FortifyServiceProvider extends ServiceProvider
             }
         });
 
-        // 🚀 流れ②：Mailtrapのリンクをクリックして認証成功した直後 ➡️ プロフィール設定画面へ移動
+        // Mailtrapのリンクをクリックして認証成功した直後  プロフィール設定画面へ移動
         $this->app->instance(VerifyEmailResponse::class, new class implements VerifyEmailResponse {
             public function toResponse($request) {
                 return $request->wantsJson()
                     ? new JsonResponse('', 204)
-                    : redirect()->route('profile.edit');
+                    : redirect()->route('prof-edit');
             }
         });
 
-        // 🚀 その他：通常のログインをした直後 ➡️ 商品一覧ページ（トップ）へ移動
+        // その他：通常のログインをした直後  商品一覧ページ（トップ）へ移動
         $this->app->instance(LoginResponse::class, new class implements LoginResponse {
             public function toResponse($request) {
                 return $request->wantsJson()
