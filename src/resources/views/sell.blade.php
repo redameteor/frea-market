@@ -13,10 +13,9 @@
             <label class="form-label">商品画像</label>
             <div class="item-image-group">
                 <div class="image-preview">
-                    @if(isset($item) && $item->img_url)
-                        <img src="{{ asset('storage/' . $item->img_url) }}" alt="商品画像">
-                    @endif
-                    <label for="image_url" class="btn-select-image">画像を選択する</label>
+                    <button type="button" class="btn-remove-image" id="btn-remove-image" style="display: none;">&times;</button>
+                    <img id="preview-img" src="{{ !empty($item->img_url) ? asset('storage/' . $item->img_url) : '' }}" alt="商品画像" style="display: none;">
+                    <label for="image_url" class="btn-select-image" id="btn-select-image">画像を選択する</label>
                 </div>
                 <input type="file" name="img_url" id="image_url" accept="image/*" class="hidden-file-input">
             </div>
@@ -29,10 +28,10 @@
             <label class="form-label">カテゴリー</label>
             <div class="category-checkboxes">
                 @foreach($categories as $category)
-                    <label>
+                    <label class="category-btn">
                         <input type="checkbox" name="category_ids[]" value="{{ $category->id }}"
                             {{ is_array(old('category_ids')) && in_array($category->id, old('category_ids')) ? 'checked' : '' }}>
-                        {{ $category->name }}
+                        <span class="category-label">{{ $category->name }}</span>
                     </label>
                 @endforeach
             </div>
@@ -85,35 +84,44 @@
 </div>
 
 <script>
-    // 画像ファイル選択用の input 要素（id="image_url"）の変化（change）を監視
-document.getElementById('image_url').addEventListener('change', function(e) {
-    // ユーザーが選択したファイル情報を取得（1つ目のファイル）
+// DOM要素の取得
+const fileInput = document.getElementById('image_url');
+const previewImg = document.getElementById('preview-img');
+const btnSelect = document.getElementById('btn-select-image');
+const btnRemove = document.getElementById('btn-remove-image');
+
+// 1. 画像が選択されたとき
+fileInput.addEventListener('change', function(e) {
     const file = e.target.files[0];
-    // ファイルが選択されなかった（キャンセルされた）場合は処理を中断
     if (!file) return;
-    // FileReader オブジェクトを作成して、画像ファイルを読み込む
+
     const reader = new FileReader();
 
-    // 読み込みが完了したときの処理
     reader.onload = function(e) {
-        // 画像を表示する div 要素を取得
-        const previewDiv = document.querySelector('.image-preview');
-        
-        // 既存のimgタグが存在するか確認あれば削除
-        let img = previewDiv.querySelector('img');
-        if (!img) {
-            img = document.createElement('img');
-            previewDiv.insertBefore(img, previewDiv.firstChild);
-        }
-        
-        // 選択した画像をセット
-        img.src = e.target.result;
-        img.style.maxWidth = '100%';
-        img.style.maxHeight = '100%';
-        img.style.objectFit = 'contain';
-        img.style.position = 'absolute';
+        // 画像をセットして表示
+        previewImg.src = e.target.result;
+        previewImg.style.display = 'block';
+
+        // 「画像を選択する」ボタンを隠し、「×」ボタンを表示
+        btnSelect.style.display = 'none';
+        btnRemove.style.display = 'flex';
     };
+
     reader.readAsDataURL(file);
+});
+
+// 2. 「×」ボタンが押されたとき（削除）
+btnRemove.addEventListener('click', function() {
+    // 選択値をリセット
+    fileInput.value = '';
+
+    // 画像を非表示
+    previewImg.src = '';
+    previewImg.style.display = 'none';
+
+    // 「×」ボタンを隠し、「画像を選択する」ボタンを再表示
+    btnRemove.style.display = 'none';
+    btnSelect.style.display = 'inline-block';
 });
 </script>
 @endsection

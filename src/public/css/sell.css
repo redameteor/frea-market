@@ -58,6 +58,8 @@
     height: 100%;
     object-fit: contain;
     position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .item-image-group .no-image {
@@ -80,7 +82,32 @@
 
 .btn-select-image:hover {
     background-color: #ff5555;
-    color: #fff;
+    color: #ffffff !important;
+}
+
+/* 追加: 右上の ×（削除）ボタン */
+.btn-remove-image {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 10;
+    width: 28px;
+    height: 28px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s;
+}
+
+.btn-remove-image:hover {
+    background-color: rgba(255, 51, 51, 0.9);
 }
 
 .hidden-file-input {
@@ -94,27 +121,39 @@
     margin-top: 8px;
 }
 
-.category-checkboxes label {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
+.category-checkboxes input[type="checkbox"] {
+    display: none;
+}
+
+.category-btn {
+    display: inline-block;
     cursor: pointer;
-    font-weight: normal;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.category-label {
+    display: inline-flex;
+    padding: 6px 14px;
+    border: 1px solid #ff5555;
+    border-radius: 20px;
     font-size: 14px;
     background-color: #f9f9f9;
-    user-select: none;
-    transition: background-color 0.2s;
+    color: #ff5555;
+    transition: all 0.2s ease;
 }
 
-.category-checkboxes label:hover {
-    background-color: #f0f0f0;
+.category-checkboxes input[type="checkbox"]:checked + .category-label {
+    background-color: #ff5555;
+    color: #ffffff;
+    border-color: #ff5555;
+    font-weight: bold;
 }
 
-.category-checkboxes input[type="checkbox"] {
-    cursor: pointer;
+.category-btn:hover input[type="checkbox"]:checked + .category-label {
+    background-color: #e04444;
+    color: #ffffff;
+    border-color: #ff5555;
 }
 
 select,
@@ -164,4 +203,21 @@ textarea:focus {
 
 .btn-primary:hover {
     background-color: #e04444;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 24px 16px;
+    }
+
+    .container h1 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .container h2 {
+        font-size: 16px;
+        margin-top: 28px;
+        margin-bottom: 16px;
+    }
 }
