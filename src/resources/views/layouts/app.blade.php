@@ -22,7 +22,7 @@
                 @csrf
                 <div class="header-form__group-content">
                     <div class="header-form__input--text">
-                        <input type="text" class="header-form__text" name="keyword" placeholder="なにをお探しですか？" value="{{ old('keyword') }}">
+                        <input type="text" class="header-form__text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}">
                     </div>
                     <div class="header-form__error">
                         @error('keyword')

@@ -102,33 +102,3 @@ main {
     padding: 0 20px;
     min-height: calc(100vh - 150px);
 }
-
-/* スマホ（画面幅 768px 以下） */
-@media (max-width: 768px) {
-
-    .header {
-        height: auto;
-    }
-
-    .header__inner {
-        flex-wrap: wrap;
-        height: auto;
-        padding: 10px 0;
-    }
-
-    .header__logo {
-        order: 1;
-    }
-
-    .header__nav {
-        order: 2;
-    }
-
-    .header-form {
-        order: 3;
-        flex: none;
-        width: 100%;
-        max-width: 100%;
-        margin-top: 15px;
-    }
-}

@@ -287,24 +287,3 @@
     text-align: center;
     font-size: 14px;
 }
-
-@media (max-width: 768px) {
-    .item-container {
-        flex-direction: column;
-        gap: 30px;
-        margin: 20px auto;
-    }
-
-    .item__image-box {
-        max-width: 100%;
-        width: 100%;
-    }
-
-    .item__header .item-name {
-        font-size: 22px;
-    }
-
-    .item__header .item-price {
-        font-size: 28px;
-    }
-}

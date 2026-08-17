@@ -32,7 +32,7 @@
                 <a href="{{ route('item.show', ['item_id' => $item->id]) }}" class="item-card">
                     <img src="{{ asset('storage/' . $item->img_url) }}" alt="{{ $item->name }}">
                     <p class="item-name">{{ $item->name }}</p>
-                    <span class="sold-label">Sold</span>
+                    <span class="sold-label">sold</span>
                 </a>
             @empty
                 <p class="no-items">購入した商品はまだありません</p>
@@ -47,7 +47,7 @@
                     <img src="{{ asset('storage/' . $item->img_url) }}" alt="{{ $item->name }}">
                     <p class="item-name">{{ $item->name }}</p>
                     @if($item->order) 
-                        <span class="sold-label">Sold</span>
+                        <span class="sold-label">sold</span>
                     @endif
                 </a>
             @empty

@@ -27,9 +27,10 @@ class CreateNewUser implements CreatesNewUsers
                 'email',
                 'max:255',
                 Rule::unique(User::class),
+            ],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            ],[
-                'name.required'      => 'ユーザー名を入力してください',
+            [
+                'name.required'      => 'お名前を入力してください',
                 'name.max'           => 'ユーザー名は20文字以内で入力してください',
                 'email.required'     => 'メールアドレスを入力してください',
                 'email.email'        => 'メールアドレスの形式が正しくありません',

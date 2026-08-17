@@ -75,15 +75,3 @@
     color: #003d80;
     text-decoration: underline;
 }
-@media (max-width: 768px) {
-    .auth-form__content {
-        height: auto;
-        padding: 40px 20px;
-        box-shadow: none;
-        background-color: transparent;
-    }
-
-    .auth-heading p {
-        font-size: 14px;
-    }
-}

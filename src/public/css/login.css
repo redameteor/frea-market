@@ -98,12 +98,3 @@
 .form__button-to-login:hover {
     text-decoration: underline;
 }
-
-@media (max-width: 768px) {
-    .login-form__content {
-        height: auto;
-        padding: 20px 15px;
-        box-shadow: none;
-        background-color: transparent;
-    }
-}

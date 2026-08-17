@@ -204,20 +204,3 @@ textarea:focus {
 .btn-primary:hover {
     background-color: #e04444;
 }
-
-@media (max-width: 768px) {
-    .container {
-        padding: 24px 16px;
-    }
-
-    .container h1 {
-        font-size: 20px;
-        margin-bottom: 20px;
-    }
-
-    .container h2 {
-        font-size: 16px;
-        margin-top: 28px;
-        margin-bottom: 16px;
-    }
-}

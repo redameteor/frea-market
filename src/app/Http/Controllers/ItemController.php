@@ -19,6 +19,12 @@ class ItemController extends Controller
         $currentTab = $request->query('tab');
 
         $recommendQuery = Item::query();
+
+        if (Auth::check()) {
+            // ログインしている場合は、ユーザーが出品した商品を除外
+            $recommendQuery->where('user_id', '!=', Auth::id());
+        }
+
         if ($keyword) {
             $recommendQuery->where('name', 'like', "%{$keyword}%");
         }

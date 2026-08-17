@@ -20,7 +20,7 @@ use App\Http\Controllers\CommentController;
 
 Route::get('/', [ItemController::class, 'index'])->name('index');
 Route::get('/search', [ItemController::class, 'index'])->name('search');
-Route::get('/items/{item_id}', [ItemController::class, 'show'])->name('item.show');
+Route::get('/item/{item_id}', [ItemController::class, 'show'])->name('item.show');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     

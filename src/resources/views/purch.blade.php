@@ -75,7 +75,7 @@
                 </tr>
                 <tr>
                     <th>支払い方法</th>
-                    <td id="selected-payment-display">未選択</td>
+                    <td id="selected-payment-display">選択してください</td>
                 </tr>
             </table>
 

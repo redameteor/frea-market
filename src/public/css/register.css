@@ -93,11 +93,3 @@
 .form__button-to-login:hover {
     text-decoration: underline;
 }
-
-@media (max-width: 768px) {
-    .register-form__content {
-        padding: 20px 15px;
-        box-shadow: none;
-        background-color: transparent;
-    }
-}

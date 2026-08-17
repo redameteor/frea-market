@@ -19,8 +19,8 @@
                 <a href="{{ route('item.show', ['item_id' => $item->id]) }}" class="item-card">
                     <img src="{{ asset('storage/' . $item->img_url) }}" alt="{{ $item->name }}">
                     <p class="item-name">{{ $item->name }}</p>
-                    @if($item->is_sold) 
-                        <span class="sold-label">Sold</span>
+                    @if($item->status === 'sold') 
+                        <span class="sold-label">sold</span>
                     @endif
                 </a>
             @empty
@@ -35,8 +35,8 @@
                     <a href="{{ route('item.show', ['item_id' => $item->id]) }}" class="item-card">
                         <img src="{{ asset('storage/' . $item->img_url) }}" alt="{{ $item->name }}">
                         <p class="item-name">{{ $item->name }}</p>
-                        @if($item->is_sold) 
-                            <span class="sold-label">Sold</span>
+                        @if($item->status === 'sold') 
+                            <span class="sold-label">sold</span>
                         @endif
                     </a>
                 @empty

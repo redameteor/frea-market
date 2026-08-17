@@ -14,7 +14,7 @@
             <div class="item-image-group">
                 <div class="image-preview">
                     <button type="button" class="btn-remove-image" id="btn-remove-image" style="display: none;">&times;</button>
-                    <img id="preview-img" src="{{ !empty($item->img_url) ? asset('storage/' . $item->img_url) : '' }}" alt="商品画像" style="display: none;">
+                    <img id="preview-img" src="" alt="商品画像" style="display: none;">
                     <label for="image_url" class="btn-select-image" id="btn-select-image">画像を選択する</label>
                 </div>
                 <input type="file" name="img_url" id="image_url" accept="image/*" class="hidden-file-input">

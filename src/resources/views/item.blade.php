@@ -8,8 +8,8 @@
 <div class="item-container">
     <div class="item__image-box">
         <img src="{{ asset('storage/' . $item->img_url) }}" alt="{{ $item->name }}">
-        @if($item->is_sold)
-            <div class="sold-label">Sold</div>
+        @if($item->status === 'sold')
+            <div class="sold-label">sold</div>
         @endif
     </div>
     <div class="item__info-box">
@@ -37,7 +37,7 @@
             </div>
         </div>
         <div class="item__actions">
-            @if($item->is_sold)
+            @if($item->status === 'sold')
                 <button class="btn-purchase btn-purchase--disabled" disabled>売り切れました</button>
             @else
                 <a href="{{ route('purchase', ['item_id' => $item->id])}}" class="btn-purchase btn-purchase--active">
@@ -59,7 +59,7 @@
                         <th>カテゴリー</th>
                         <td>
                             <span class="category-tag">メンズ</span>
-                            <span class="category-tag">トップス</span>
+                            <span class="category-tag">ファッション</span>
                         </td>
                     </tr>
                     <tr>
@@ -159,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (likeImg) {
                     if (data.isLiked) {
                         likeImg.src = "{{ asset('img/ハートロゴ_ピンク.png') }}";
-                        likeImg.alt = "いいね済";
+                        likeImg.alt = "いいね済み";
                     } else {
                         likeImg.src = "{{ asset('img/ハートロゴ_デフォルト.png') }}";
                         likeImg.alt = "未いいね";
