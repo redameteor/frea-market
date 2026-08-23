@@ -57,4 +57,30 @@
     </div>
     <button type="submit" class="btn">更新する</button>
 </form>
+
+<script>
+//  更新ボタンを押さずに、画像選択時の見た目だけを反映させるscript
+document.getElementById('img_url').addEventListener('change', function(e) {
+    // 選択されたファイルを取得
+    const file = e.target.files[0];
+
+    // ファイルが選択されているか確認
+    if (file) {
+        // FileReaderオブジェクトを作成（ブラウザ上でファイルを読み込むための機能）
+        const reader = new FileReader();
+
+        // ファイルの読み込みが完了した時の処理
+        reader.onload = function(e) {
+            // 画像を表示させるエリア（プレビュー表示用要素）を取得
+            const previewContainer = document.querySelector('.image-preview');
+
+            // 読み込んだ画像データ（Data URL）を img タグとしてプレビューエリアに挿入
+            previewContainer.innerHTML = `<img src="${e.target.result}" alt="プロフィール画像">`;
+        };
+
+        // ファイルを Data URL 形式（文字列データ）として読み込む
+        reader.readAsDataURL(file);
+    }
+});
+</script>
 @endsection

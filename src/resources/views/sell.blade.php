@@ -84,7 +84,7 @@
 </div>
 
 <script>
-// DOM要素の取得
+// 画像選択時のプレビュー表示と、削除ボタンによるリセット処理のscript
 const fileInput = document.getElementById('image_url');
 const previewImg = document.getElementById('preview-img');
 const btnSelect = document.getElementById('btn-select-image');

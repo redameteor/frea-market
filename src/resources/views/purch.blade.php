@@ -88,24 +88,26 @@
         </div>
     </form>
 </div>
+
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const paymentSelect = document.querySelector('.select-payment');
-        const paymentDisplay = document.getElementById('selected-payment-display');
+// 支払方法選択時、テキストをリアルタイム更新するscript
+document.addEventListener('DOMContentLoaded', function() {
+    const paymentSelect = document.querySelector('.select-payment');
+    const paymentDisplay = document.getElementById('selected-payment-display');
 
-        function updateDisplay() {
-            if (paymentSelect.selectedIndex > 0) {
-                paymentDisplay.textContent = paymentSelect.options[paymentSelect.selectedIndex].text;
-            } else {
-                paymentDisplay.textContent = '未選択';
-            }
+    function updateDisplay() {
+        if (paymentSelect.selectedIndex > 0) {
+            paymentDisplay.textContent = paymentSelect.options[paymentSelect.selectedIndex].text;
+        } else {
+            paymentDisplay.textContent = '未選択';
         }
+    }
 
-        // 変更時イベント
-        paymentSelect.addEventListener('change', updateDisplay);
+    // 変更時イベント
+    paymentSelect.addEventListener('change', updateDisplay);
 
-        // ページ読み込み時（old値で初期選択されている場合の反映）
-        updateDisplay();
-    });
+    // ページ読み込み時（old値で初期選択されている場合の反映）
+    updateDisplay();
+});
 </script>
 @endsection

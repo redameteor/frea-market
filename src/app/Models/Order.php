@@ -18,11 +18,13 @@ class Order extends Model
         'delivery_building',
     ];
 
+    // この注文をした購入者を取得するリレーション
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 
+    // この注文で購入された商品を取得するリレーション
     public function item()
     {
         return $this->belongsTo(Item::class);

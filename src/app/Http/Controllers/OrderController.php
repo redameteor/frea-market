@@ -44,7 +44,7 @@ class OrderController extends Controller
             
         // クレジット払い
         if ($request->payment_method === 'card') {
-            Stripe::setApiKey(env('STRIPE_SECRET'));
+            Stripe::setApiKey(config('services.stripe.secret'));
             $checkout_session = Session::create([
                 'payment_method_types' => ['card'],
                 'line_items' => [[
@@ -100,7 +100,7 @@ class OrderController extends Controller
         $sessionId = $request->query('session_id');
 
         if ($sessionId) {
-            Stripe::setApiKey(env('STRIPE_SECRET'));
+            Stripe::setApiKey(config('services.stripe.secret'));
 
             // Stripeに「このセッションの詳細ちょうだい」とリクエスト
             $session = Session::retrieve($sessionId);

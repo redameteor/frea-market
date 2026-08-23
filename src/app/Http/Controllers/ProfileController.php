@@ -33,6 +33,7 @@ class ProfileController extends Controller
 
     public function update(ProfileRequest $request)
     {
+        
         $user = Auth::user();
 
         // 新しいプロフィール画像がアップロードされた場合、古い画像を削除して新しい画像を保存

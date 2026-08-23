@@ -117,6 +117,7 @@
 </div>
 
 <script>
+// いいねボタンのscript
 document.addEventListener('DOMContentLoaded', function () {
     const likeBtn = document.querySelector('.btn-like');
 

@@ -14,35 +14,37 @@ class Item extends Model
         'name',
         'brand',
         'condition',
-        'price',
         'description',
         'price',
         'img_url',
         'status',
     ];
 
+    // この商品に投稿されたコメント一覧を取得するリレーション
     public function comments()
     {
         return $this->hasMany(Comment::class);
     }
 
+    // この商品の注文情報を取得するリレーション
     public function order()
     {
         return $this->hasOne(Order::class);
     }
 
+    // この商品をいいねしたユーザー一覧を取得するリレーション
     public function likedUsers()
     {
         return $this->belongsToMany(User::class, 'likes');
     }
 
-    // カテゴリーとのリレーション（中間テーブル名 item_categories）
+    // この商品に設定されているカテゴリー一覧を取得するリレーション（中間テーブル名 item_categories）
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'item_categories');
     }
 
-    // 出品者（User）とのリレーション
+    // この商品の出品者を取得するリレーション
     public function user()
     {
         return $this->belongsTo(User::class);

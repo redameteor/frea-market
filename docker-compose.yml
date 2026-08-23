@@ -39,11 +39,10 @@ services:
     ports:
       - 8080:80
 
-# 📧 メール確認ツール（Mailpit）を追加
+#  メール確認ツール（Mailpit）を追加
   mailpit:
     image: axllent/mailpit:latest
     container_name: mailpit
     ports:
       - "1025:1025" # Laravelがメールを送信するためのポート
       - "8025:8025" # ブラウザでメールを見るためのポート
-    # 💡 もし他のサービス（phpなど）で「networks:」を設定している場合は、ここにも同じネットワーク名を合わせて追記してください。
