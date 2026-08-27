@@ -69,10 +69,6 @@
                     <th>商品代金</th>
                     <td>¥{{ number_format($item->price) }}</td>
                 </tr>
-                <tr class="total-row">
-                    <th>支払い金額</th>
-                    <td class="total-price">¥{{ number_format($item->price) }}</td>
-                </tr>
                 <tr>
                     <th>支払い方法</th>
                     <td id="selected-payment-display">選択してください</td>

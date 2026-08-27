@@ -58,8 +58,9 @@
                     <tr>
                         <th>カテゴリー</th>
                         <td>
-                            <span class="category-tag">メンズ</span>
-                            <span class="category-tag">ファッション</span>
+                            @foreach($item->categories ?? [] as $category)
+                                <span class="category-tag">{{ $category->name }}</span>
+                            @endforeach
                         </td>
                     </tr>
                     <tr>
@@ -87,7 +88,6 @@
                             </div>
                             <div class="comment-body">
                                 <p class="comment-text">{!! nl2br(e($comment->content)) !!}</p>
-                                <span class="comment-date">{{ $comment->created_at->format('Y-m-d H:i') }}</span>
                             </div>
                         </div>
                     @empty
